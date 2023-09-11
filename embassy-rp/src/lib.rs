@@ -198,13 +198,13 @@ macro_rules! select_bootloader {
     ( $( $feature:literal => $loader:ident, )+ default => $default:ident ) => {
         $(
             #[cfg(feature = $feature)]
-            #[link_section = ".boot2"]
+            // #[link_section = ".boot2"]
             #[used]
             static BOOT2: [u8; 256] = rp2040_boot2::$loader;
         )*
 
         #[cfg(not(any( $( feature = $feature),* )))]
-        #[link_section = ".boot2"]
+        // #[link_section = ".boot2"]
         #[used]
         static BOOT2: [u8; 256] = rp2040_boot2::$default;
     }
